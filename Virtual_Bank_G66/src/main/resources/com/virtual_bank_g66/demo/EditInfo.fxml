@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.virtual_bank_g66.demo.EditInfoController"
+      alignment="TOP_CENTER" spacing="20" style="-fx-border-style: solid; -fx-border-width: 2px;"
+      prefWidth="400" prefHeight="300">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <Label text="Edit Information" style="-fx-font-weight: bold; -fx-font-size: 18;" VBox.vgrow="NEVER"/>
+    <GridPane VBox.vgrow="ALWAYS" alignment="CENTER" hgap="10" vgap="20">
+        <Label text="Edit your name:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+        <TextField fx:id="editNameField" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+        <Label text="Verify your old password:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+        <PasswordField fx:id="ConfirmPasswordField" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+        <Label text="Enter your new password:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+        <PasswordField fx:id="editPasswordField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+        <Label text="Confirm your new password:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+        <PasswordField fx:id="confirmPasswordField" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+        <Label text="Edit your mail address:" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+        <TextField fx:id="editMailField"  GridPane.rowIndex="4" GridPane.columnIndex="1" />
+    </GridPane>
+
+    <HBox spacing="25" alignment="CENTER">
+        <Button text="Save changes" fx:id="btnSave" style="-fx-font-weight: bold;" VBox.vgrow="NEVER" onAction="#onSaveChangesClicked"/>
+        <Button text="Back"  fx:id="btnBack" style="-fx-font-weight: bold;" VBox.vgrow="NEVER" onAction="#onBackClicked"/>
+    </HBox>
+
+</VBox>

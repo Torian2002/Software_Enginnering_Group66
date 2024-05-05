@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.layout.GridPane?>
+
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.virtual_bank_g66.demo.DepositAndWithdrawalController" spacing="10" alignment="CENTER">
+    <padding>
+        <Insets top="100" right="80" bottom="60" left="80"/>
+    </padding>
+
+    <Text fx:id="ServiceType" text="Withdrawal" style="-fx-font-size: 30; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="20" vgap="20" alignment="CENTER">
+
+        <Label text="AccountType:" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <ComboBox fx:id="roleComboBox" prefWidth="150.0" promptText="Choose Account Type" GridPane.rowIndex="0" GridPane.columnIndex="2">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Current" />
+                    <String fx:value="Saving" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Label text="Amount:" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <TextField fx:id="amountField" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+
+        <Label text="Description:" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <TextField fx:id="descriptionField" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+
+        <Label text="Enter Your Password:" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        <PasswordField fx:id="passwordField" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+
+    </GridPane>
+    <HBox spacing="160" alignment="CENTER">
+        <Button fx:id="btnConfirm" text="Confirm" onAction="#handleConfirm"/>
+        <Button fx:id="btnBack" text="Back" onAction="#handleBack"/>
+    </HBox>
+</VBox>

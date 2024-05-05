@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+
+<?import javafx.scene.shape.Circle?>
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.virtual_bank_g66.demo.MainPageController"
+      alignment="TOP_CENTER" spacing="80" style="-fx-padding: 80; -fx-background-color: #f0f0f0;">
+    <Label text="Main Menu" style="-fx-font-size: 48; -fx-font-weight: bold;"/>
+    <HBox spacing="80" alignment="CENTER">
+        <VBox spacing="40" alignment="TOP_CENTER">
+            <Button fx:id="btnTransaction" text="Transaction" minWidth="200" minHeight="80" styleClass="menu-button" onAction="#onTransactionClicked"/>
+            <Button fx:id="btnInvestment" text="Investment" minWidth="200" minHeight="80" styleClass="menu-button" onAction="#onInvestmentClicked"/>
+            <Button fx:id="btnManageTasks" text="Manage tasks and saving goals" minWidth="200" minHeight="80" styleClass="menu-button" onAction="#onManageTasksClicked"/>
+        </VBox>
+        <VBox spacing="40" alignment="CENTER">
+            <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true">
+                <clip>
+                    <Circle centerX="50" centerY="50" radius="50"/>
+                </clip>
+                <Image url="@image/turtle.png"/>
+            </ImageView>
+            <Label fx:id="labelWelcome" text="Welcome, tong, Please Select Service!" wrapText="true" maxWidth="400" alignment="CENTER" style="-fx-font-size: 24;"/>
+            <Button fx:id="btnAccountInfo" text="Account info"  minWidth="200" minHeight="80" onAction="#onCheckAccountInfoClicked" styleClass="menu-button"/>
+        </VBox>
+        <VBox spacing="40" alignment="TOP_CENTER">
+            <Button fx:id="btnWithdrawal" text="Withdrawal"  minWidth="200" minHeight="80" styleClass="menu-button" onAction="#onWithdrawalClicked"/>
+            <Button fx:id="btnDeposit" text="Deposit"  minWidth="200" minHeight="80" styleClass="menu-button" onAction="#onDepositClicked"/>
+            <Button fx:id="btnLogout" text="Log Out"  minWidth="200" minHeight="80" onAction="#onLogoutClicked" styleClass="menu-button"/>
+        </VBox>
+    </HBox>
+</VBox>

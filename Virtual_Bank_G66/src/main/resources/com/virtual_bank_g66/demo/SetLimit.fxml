@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.virtual_bank_g66.demo.TransactionLimitController" spacing="10" alignment="CENTER">
+    <padding>
+        <Insets top="100" right="80" bottom="60" left="80"/>
+    </padding>
+
+    <Text text="Set Transaction limit to your Child" style="-fx-font-size: 30; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="20" vgap="20" alignment="CENTER">
+
+        <Label text="Child's Current Limit:" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <TextField fx:id="Currentlimit" GridPane.rowIndex="0" GridPane.columnIndex="2" editable="false"/>
+
+        <Label text="The New Limit:" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <TextField fx:id="limit" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+
+        <Label text="Enter Your Password:" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <TextField fx:id="passwordField" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+
+    </GridPane>
+
+    <HBox spacing="160" alignment="CENTER">
+        <Button fx:id="btnConfirm" text="Confirm" onAction="#onConfirmClicked"/>
+        <Button fx:id="btnBack" text="Back" onAction="#onBackClicked"/>
+    </HBox>
+</VBox>

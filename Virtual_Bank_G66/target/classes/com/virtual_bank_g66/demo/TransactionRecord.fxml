@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.layout.HBox?>
+
+<?import java.lang.String?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.virtual_bank_g66.demo.TransactionRecordController" spacing="10" alignment="CENTER">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <Text fx:id="Title" text="Transaction Record" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+    <!-- Filter Section -->
+    <HBox spacing="10">
+        <Label fx:id="usernameField" text=""/>
+    </HBox>
+
+
+    <TableView fx:id="transactionTable" prefHeight="200">
+        <columns>
+            <TableColumn text="Date" prefWidth="100">
+                <cellValueFactory>
+                    <PropertyValueFactory property="dateRange"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Amount" prefWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="amount"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="AccountType" prefWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="accountType"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Deposit/Withdrawal" prefWidth="130">
+                <cellValueFactory>
+                    <PropertyValueFactory property="depositWithdrawal"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Description" prefWidth="130">
+                <cellValueFactory>
+                    <PropertyValueFactory property="description"/>
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+
+    <Button text="Back" fx:id="btnReturn" onAction="#onReturnClicked" prefWidth="100"/>
+</VBox>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.shape.Circle?>
+
+
+<?import javafx.scene.text.Text?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.virtual_bank_g66.demo.TasksGoalController" spacing="20" alignment="TOP_CENTER" prefWidth="600" prefHeight="600">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <Label fx:id="labelTitle" text="Task and Goal Management" style="-fx-font-size: 24; -fx-font-weight: bold;" alignment="CENTER"/>
+
+    <ImageView fx:id="imageViewProfile" fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true">
+        <clip>
+            <Circle centerX="50" centerY="50" radius="50"/>
+        </clip>
+        <image>
+            <Image url="@image/turtle.png"/>
+        </image>
+    </ImageView>
+
+    <GridPane hgap="20" vgap="20" alignment="CENTER">
+        <Text fx:id="preText" text="Child's Current Saving Goal:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Text fx:id="SavingGoal" text="" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <TableView fx:id="tasksTable" prefHeight="150" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="taskNumberColumn" text="Task Number" prefWidth="60">
+                <cellValueFactory>
+                    <PropertyValueFactory property="taskNumber"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="taskContentColumn" text="Task Content" prefWidth="250">
+                <cellValueFactory>
+                    <PropertyValueFactory property="taskContent"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="rewardColumn" text="Reward" prefWidth="70">
+                <cellValueFactory>
+                    <PropertyValueFactory property="reward"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="stateColumn" text="State" prefWidth="100">
+                <cellValueFactory>
+                    <PropertyValueFactory property="state"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="actionColumn" text="Action" prefWidth="100">
+            </TableColumn>
+        </columns>
+    </TableView>
+
+    <GridPane hgap="20" vgap="20" alignment="CENTER">
+        <Button fx:id="btnAdd" text="Add New Task" onAction="#onADDClicked" minWidth="70" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Text  text="Enter the task number you want to delete:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="taskNum"  text="" prefWidth="80" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Button fx:id="btnDelete" text="Delete" onAction="#onDeletClicked" minWidth="70" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+    </GridPane>
+
+    <HBox fx:id="hBoxBack" spacing="25" alignment="CENTER">
+        <Button fx:id="btnBack" text="Back" onAction="#onBackClicked" minWidth="70"/>
+    </HBox>
+</VBox>

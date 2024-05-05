@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.virtual_bank_g66.demo.AccountInfoController"
+      prefWidth="800" prefHeight="600" spacing="20" alignment="TOP_CENTER">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <Label text="Account Information" alignment="CENTER" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+    <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true">
+        <clip>
+            <Circle centerX="50" centerY="50" radius="50"/>
+        </clip>
+        <Image url="@image/turtle.png"/>
+    </ImageView>
+    <GridPane hgap="20" vgap="20" alignment="CENTER">
+        <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1" editable="false"/>
+
+        <Label text="Role:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="roleField" GridPane.rowIndex="1" GridPane.columnIndex="1" text="Parent" editable="false"/>
+
+        <Label text="Your current child:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="currentChild" GridPane.rowIndex="2" GridPane.columnIndex="1" editable="false"/>
+
+        <Label text="Child's Current Account:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="currentAccountField" GridPane.rowIndex="3" GridPane.columnIndex="1" text="No children yet" editable="false"/>
+
+        <Label text="Child's Saving Account:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <TextField fx:id="savingAccountField" GridPane.rowIndex="4" GridPane.columnIndex="1" text="No children yet" editable="false"/>
+
+        <Label text="Child's Account Limit:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+        <TextField fx:id="limitField" GridPane.rowIndex="5" GridPane.columnIndex="1" text="No children yet" editable="false"/>
+
+       </GridPane>
+    <HBox spacing="25" alignment="CENTER">
+        <Button fx:id="btnEdit" text="Edit"  onAction="#onEditClicked" minWidth="70"/>
+        <Button fx:id="btnBack" text="Back" onAction="#onBackClicked" minWidth="70"/>
+    </HBox>
+</VBox>

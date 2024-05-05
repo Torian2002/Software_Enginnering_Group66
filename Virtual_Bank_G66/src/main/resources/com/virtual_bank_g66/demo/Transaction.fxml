@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.virtual_bank_g66.demo.TransactionRecordController" spacing="10" alignment="CENTER" prefWidth="600" prefHeight="400">
+    <padding>
+        <Insets top="100" right="80" bottom="60" left="80"/>
+    </padding>
+    <Text fx:id="Title" text="Transaction System" style="-fx-font-size: 30; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="20" vgap="20" alignment="CENTER">
+        <Button text="Transfer" fx:id="btnTransfer" onAction="#onTransferClicked" prefWidth="225" prefHeight="120" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Button text="Transaction Record" fx:id="btnTransactionRecord" onAction="#onTransactionRecordClicked" prefWidth="225" prefHeight="120" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <HBox spacing="30" alignment="CENTER">
+        <Button text="Back" fx:id="btnBack" onAction="#onBackClicked" prefWidth="225" prefHeight="120"/>
+    </HBox>
+</VBox>
