@@ -91,7 +91,7 @@ public class HelloController {
     }
 
     private boolean checkCredentials(String role, String name, String password) {
-        String csvFile = "src/main/resources/com/virtual_bank_g66/demo/csv/userInfo.csv";
+        String csvFile = Utils.CSV_FILE_PATH_userInfo;
         String line;
         String cvsSplitBy = ","; // CSV delimiter
 

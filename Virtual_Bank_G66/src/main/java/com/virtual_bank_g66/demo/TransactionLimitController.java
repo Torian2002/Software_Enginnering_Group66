@@ -1,6 +1,7 @@
 package com.virtual_bank_g66.demo;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
@@ -15,7 +16,7 @@ public class TransactionLimitController {
     @FXML
     private TextField limit;
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
     @FXML
     private TextField Currentlimit;
     @FXML

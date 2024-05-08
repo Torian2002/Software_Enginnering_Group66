@@ -75,16 +75,20 @@ public class TasksGoalController {
             this.btn.setOnAction(event -> {
                 TaskBean task = getTableView().getItems().get(getIndex());
                 if (task != null) {
-                    if (btnName.equals("Confirm") && !task.getState().equals("Already done")) {
+                    if (btnName.equals("Confirm") && task.getState().equals("To be confirmed")) {
                         task.setState(this.State);
                         getTableView().refresh();
                         FileUtil.updateTasks(getTableView().getItems(), "stateChange");
                         FileUtil.sendRewardToChild(task.getID(), task.getReward());
                     } else if (btnName.equals("Confirm") && task.getState().equals("Already done")) {
                         Utils.showAlert("INFO", "Reward has been given to Child!", Alert.AlertType.INFORMATION);
+                    } else if (btnName.equals("Confirm") && task.getState().equals("To be finished")) {
+                        Utils.showAlert("INFO", "Task has not been finished by your child!", Alert.AlertType.INFORMATION);
                     } else if (btnName.equals("Finish") && (task.getState().equals("Already done") || task.getState().equals("To be confirmed"))) {
-                        Utils.showAlert("INFO", "Task has already finished or waiting to be confirmed!", Alert.AlertType.INFORMATION);
+                        Utils.showAlert("INFO", "Task has already been finished or waiting to be confirmed!", Alert.AlertType.INFORMATION);
                     } else {
+                        task.setState(this.State);
+                        getTableView().refresh();
                         FileUtil.updateTasks(getTableView().getItems(), "stateChange");
                     }
                 }

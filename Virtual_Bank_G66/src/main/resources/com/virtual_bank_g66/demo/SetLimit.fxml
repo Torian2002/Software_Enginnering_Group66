@@ -22,7 +22,7 @@
         <TextField fx:id="limit" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
 
         <Label text="Enter Your Password:" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-        <TextField fx:id="passwordField" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+        <PasswordField fx:id="passwordField" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
 
     </GridPane>
 
