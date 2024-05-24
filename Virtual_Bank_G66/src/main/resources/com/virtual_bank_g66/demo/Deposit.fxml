@@ -33,8 +33,11 @@
         <Label text="Description:" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
         <TextField fx:id="descriptionField" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
 
-        <Label text="Enter Your Password:" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-        <PasswordField fx:id="passwordField" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+        <Label text="Time Limit:" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        <TextField fx:id="timeLimitField" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+
+        <Label text="Enter Your Password:" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+        <PasswordField fx:id="passwordField" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
 
     </GridPane>
 

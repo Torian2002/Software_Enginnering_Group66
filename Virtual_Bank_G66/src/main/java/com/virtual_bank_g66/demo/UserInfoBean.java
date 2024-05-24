@@ -1,22 +1,16 @@
 package com.virtual_bank_g66.demo;
 
-public class UserSessionBean {
+public class UserInfoBean {
     // User's info which will not change during a session
-    private static UserSessionBean instance;
+    private static UserInfoBean instance;
     private String userName;
     private String Password;
     private String role;
-
     private String Mail;
     private String ID;
-
-    // The following variables will easily been changed as users do something
-    private float Current;
-    private float Saving;
-    private float Goal;
-
     private String Associated_child;
     private String Associated_ID;
+
 
     public String getUserName() {
         return userName;
@@ -24,6 +18,10 @@ public class UserSessionBean {
 
     public String getPassword() {
         return Password;
+    }
+
+    public void setPassword(String password) {
+        this.Password = password;
     }
 
     public String getRole() {
@@ -38,28 +36,8 @@ public class UserSessionBean {
         return ID;
     }
 
-    public float getCurrent() {
-        return Current;
-    }
-
-    public void setCurrent(float current) {
-        Current = current;
-    }
-
-    public float getSaving() {
-        return Saving;
-    }
-
-    public void setSaving(float saving) {
-        Saving = saving;
-    }
-
-    public float getGoal() {
-        return Goal;
-    }
-
-    public void setGoal(float goal) {
-        Goal = goal;
+    public void setID(String id) {
+        this.ID = id;
     }
 
     public String getAssociated_ID() {
@@ -78,8 +56,7 @@ public class UserSessionBean {
         Associated_child = associated_child;
     }
 
-
-    private UserSessionBean(String userName, String role, String id, String password, String mail, String associated_child, String associated_ID) {
+    private UserInfoBean(String userName, String role, String id, String password, String mail, String associated_child, String associated_ID) {
         this.userName = userName;
         this.role = role;
         this.ID = id;
@@ -89,14 +66,14 @@ public class UserSessionBean {
         this.Associated_ID = associated_ID;
     }
 
-    public static UserSessionBean getInstance(String userName, String role, String id, String password, String mail, String associated_child, String associated_ID) {
+    public static UserInfoBean getInstance(String userName, String role, String id, String password, String mail, String associated_child, String associated_ID) {
         if (instance == null) {
-            instance = new UserSessionBean(userName, role, id, password, mail, associated_child, associated_ID);
+            instance = new UserInfoBean(userName, role, id, password, mail, associated_child, associated_ID);
         }
         return instance;
     }
 
-    public static UserSessionBean getInstance() {
+    public static UserInfoBean getInstance() {
         return instance;
     }
 
@@ -113,3 +90,6 @@ public class UserSessionBean {
             this.Mail = email;
     }
 }
+
+
+

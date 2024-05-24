@@ -34,15 +34,15 @@ public class EditInfoController {
     }
 
     private void loadCurrentUserInfo() {
-        UserSessionBean session = UserSessionBean.getInstance();
-        editMailField.setText(session.getMail()); // Set the email field with the current user's email
-        editNameField.setText(session.getUserName()); // Set the name field with the current user's email
+        UserInfoBean userInfo = UserInfoBean.getInstance();
+        editMailField.setText(userInfo.getMail()); // Set the email field with the current user's email
+        editNameField.setText(userInfo.getUserName()); // Set the name field with the current user's email
     }
 
     @FXML
     private void onSaveChangesClicked() {
-        UserSessionBean session = UserSessionBean.getInstance();
-        String currentPassword = session.getPassword(); // Assuming the password is stored here for the example
+        UserInfoBean userInfo = UserInfoBean.getInstance();
+        String currentPassword = userInfo.getPassword(); // Assuming the password is stored here for the example
 
         if (!ConfirmPasswordField.getText().equals(currentPassword)) {
             Utils.showAlert("Error", "Original password is incorrect.", Alert.AlertType.ERROR);
@@ -60,8 +60,8 @@ public class EditInfoController {
         }
 
         try {
-            updateUserInfo(session.getID(), editNameField.getText(), editPasswordField.getText(), editMailField.getText());
-            session.updateSessionDetails(editNameField.getText(), editPasswordField.getText(), editMailField.getText());
+            updateUserInfo(userInfo.getID(), editNameField.getText(), editPasswordField.getText(), editMailField.getText());
+            userInfo.updateSessionDetails(editNameField.getText(), editPasswordField.getText(), editMailField.getText());
             Utils.showAlert("Success", "Information updated successfully.", Alert.AlertType.INFORMATION);
 
         } catch (IOException e) {
@@ -92,8 +92,8 @@ public class EditInfoController {
 
     @FXML
     public void onBackClicked() {
-        UserSessionBean session = UserSessionBean.getInstance();
-        String role = session.getRole();
+        UserInfoBean userInfo = UserInfoBean.getInstance();
+        String role = userInfo.getRole();
         if (role.equals("Child")){
             Utils.showPage("Child_InfoPage.fxml", btnBack);
         } else {

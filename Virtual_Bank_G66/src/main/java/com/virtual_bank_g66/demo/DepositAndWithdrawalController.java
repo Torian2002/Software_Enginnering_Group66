@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
 import java.io.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
@@ -22,6 +23,9 @@ public class DepositAndWithdrawalController {
     private PasswordField passwordField;
 
     @FXML
+    private TextField timeLimitField;
+
+    @FXML
     private Button btnBack;
 
     @FXML
@@ -33,7 +37,7 @@ public class DepositAndWithdrawalController {
     @FXML
     private void handleConfirm(ActionEvent event) {
 
-        UserSessionBean session = UserSessionBean.getInstance();
+        UserInfoBean userInfo = UserInfoBean.getInstance();
         String serviceType = ServiceType.getText();
         String accountType = roleComboBox.getValue();
         String description = descriptionField.getText();
@@ -47,20 +51,22 @@ public class DepositAndWithdrawalController {
                 amountField.getText() == null || amountField.getText().isEmpty()) {
             Utils.showAlert("Error", "There are invalid inputs, please enter all required information.", Alert.AlertType.ERROR);
         } else {
+
             try {
                 float amount = Float.parseFloat(amountField.getText()); // Parsing to check if the amount is a valid float.
 
-                if (!password.equals(session.getPassword())) {
+
+                if (!password.equals(userInfo.getPassword())) {
                     Utils.showAlert("Error", "Original password is incorrect.", Alert.AlertType.ERROR);
                     return;
                 }
 
-                if (!updateAccountDetails(session.getID(), serviceType, accountType, amount)) {
+                if (!updateAccountDetails(userInfo.getID(), serviceType, accountType, amount)) {
                     Utils.showAlert("Error", "Failed to update account details.", Alert.AlertType.ERROR);
                     return;
                 }
 
-                logTransaction(session.getID(), LocalDateTime.now(), amount, accountType, serviceType, description);
+                logTransaction(userInfo.getID(), LocalDateTime.now(), amount, accountType, serviceType, description);
                 Utils.showAlert("Congratulations", "Transaction successful.", Alert.AlertType.INFORMATION);
             } catch (NumberFormatException e) {
                 Utils.showAlert("Error", "Invalid amount. Please enter a valid number.", Alert.AlertType.ERROR);
@@ -121,6 +127,12 @@ public class DepositAndWithdrawalController {
         float currentAmount = Float.parseFloat(values[1]);
         float savingAmount = Float.parseFloat(values[2]);
         float limit = Float.parseFloat(values[3]);
+        String timeLimit = values[5];
+        String initialDateStr = values[6];
+        String expireDateStr = values[7];
+
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         if ("Withdrawal".equals(serviceType) && amount > limit) {
             Utils.showAlert("Sorry", "Exceed your account limitation.", Alert.AlertType.INFORMATION);
@@ -130,8 +142,14 @@ public class DepositAndWithdrawalController {
         if ("Withdrawal".equals(serviceType)) {
             if ("Current".equals(accountType) && currentAmount >= amount) {
                 values[1] = String.format("%.2f", currentAmount - amount);
-            } else if ("Savings".equals(accountType) && savingAmount >= amount) {
-                values[2] = String.format("%.2f", savingAmount - amount);
+            } else if ("Saving".equals(accountType) && savingAmount >= amount) {
+                LocalDateTime expireDate = LocalDateTime.parse(expireDateStr, formatter);
+                if (now.isBefore(expireDate)) {
+                    Utils.showAlert("Sorry", "Savings account funds are not yet available for withdrawal.", Alert.AlertType.INFORMATION);
+                    return false;
+                } else {
+                    values[2] = String.format("%.2f", savingAmount - amount);
+                }
             } else {
                 Utils.showAlert("Sorry", "Insufficient funds.", Alert.AlertType.INFORMATION);
                 return false;
@@ -140,7 +158,14 @@ public class DepositAndWithdrawalController {
             if ("Current".equals(accountType)) {
                 values[1] = String.format("%.2f", currentAmount + amount);
             } else {
+
                 values[2] = String.format("%.2f", savingAmount + amount);
+                LocalDateTime initialDate = now;
+                int timeLimitDays = Integer.parseInt(timeLimit);
+                LocalDateTime expireDate = initialDate.plusDays(timeLimitDays);
+
+                values[6] = initialDate.format(formatter);
+                values[7] = expireDate.format(formatter);
             }
         }
         return true;

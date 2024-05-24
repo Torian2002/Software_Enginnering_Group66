@@ -195,9 +195,9 @@ public class FileUtil {
                 }
             }
         } else if (service.equals("Delete")){
-            UserSessionBean userSession = UserSessionBean.getInstance();
+            UserInfoBean userInfo = UserInfoBean.getInstance();
             List<TaskBean> filteredTasks = existingTasks.stream()
-                    .filter(task -> !task.getID().equals(userSession.getAssociated_ID()))
+                    .filter(task -> !task.getID().equals(userInfo.getAssociated_ID()))
                     .collect(Collectors.toList());
             filteredTasks.addAll(updatedTasks);
             existingTasks = filteredTasks;

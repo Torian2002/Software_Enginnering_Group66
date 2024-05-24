@@ -109,7 +109,7 @@ public class HelloController {
                     // Assuming passwords are stored in a secure manner, e.g., hashed
                     if (fileRole.equals(role) && fileName.equals(name) && filePassword.equals(password)) {
                         // Create and save user sessions and communicate across multiple pages
-                        UserSessionBean.getInstance(userInfo[2], userInfo[1], userInfo[0], userInfo[3],  userInfo[4], userInfo[5], userInfo[6]);
+                        UserInfoBean.getInstance(userInfo[2], userInfo[1], userInfo[0], userInfo[3],  userInfo[4], userInfo[5], userInfo[6]);
                         return true;
                     }
                 }

@@ -25,17 +25,17 @@ public class TransactionLimitController {
 
     @FXML
     private void initialize() {
-        UserSessionBean userSession= UserSessionBean.getInstance();
-        if (userSession.getAssociated_ID().equals(" ") || userSession.getAssociated_child().equals(" ")) {
+        UserInfoBean userInfo= UserInfoBean.getInstance();
+        if (userInfo.getAssociated_ID().equals(" ") || userInfo.getAssociated_child().equals(" ")) {
             Utils.showAlert("Warning", "You must first associate a child account.", Alert.AlertType.WARNING);
         }
-        FileUtil.getLimit(userSession.getAssociated_ID(), Currentlimit);
+        FileUtil.getLimit(userInfo.getAssociated_ID(), Currentlimit);
     }
 
     @FXML
     private void onConfirmClicked() {
         String enteredPassword = passwordField.getText();
-        UserSessionBean userSessionBean = UserSessionBean.getInstance();
+        UserInfoBean userInfoBean = UserInfoBean.getInstance();
 
 
         if (limit.getText().isEmpty()) {
@@ -44,7 +44,7 @@ public class TransactionLimitController {
             return;
         }
 
-        if (!enteredPassword.equals(userSessionBean.getPassword())) {
+        if (!enteredPassword.equals(userInfoBean.getPassword())) {
             Utils.showAlert("Error", "Incorrect password.", Alert.AlertType.ERROR);
             passwordField.clear();
             return;
@@ -56,7 +56,7 @@ public class TransactionLimitController {
                     .collect(Collectors.toList());
 
             for (String[] line : lines) {
-                if (line[0].equals(userSessionBean.getAssociated_ID())) {
+                if (line[0].equals(userInfoBean.getAssociated_ID())) {
                     line[3] = limit.getText(); // Assuming limit is at index 2
                     break;
                 }

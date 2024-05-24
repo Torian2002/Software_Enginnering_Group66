@@ -18,9 +18,6 @@ public class TaskBean {
 
     // Getters and Setters
 
-
-
-
     public String getID() {
         return ID;
     }

@@ -46,20 +46,20 @@ public class TasksGoalController {
     }
 
     private void loadTasks() {
-        UserSessionBean userSession = UserSessionBean.getInstance();
-        if (userSession.getRole().equals("Child")){
+        UserInfoBean userInfo = UserInfoBean.getInstance();
+        if (userInfo.getRole().equals("Child")){
             actionColumn.setCellFactory(param -> new ButtonCell("Finish", "To be confirmed"));
-            List<TaskBean> tasks = FileUtil.loadTasks(userSession.getID());
+            List<TaskBean> tasks = FileUtil.loadTasks(userInfo.getID());
             tasksTable.getItems().setAll(tasks);
-            FileUtil.getGoal(userSession.getID(), currentGoalField);
+            FileUtil.getGoal(userInfo.getID(), currentGoalField);
         } else {
-            if (userSession.getAssociated_ID().equals(" ")){
+            if (userInfo.getAssociated_ID().equals(" ")){
                 preText.setText("You don't have any associated goal");
             } else {
                 actionColumn.setCellFactory(param -> new ButtonCell("Confirm", "Already done"));
-                List<TaskBean> tasks = FileUtil.loadTasks(userSession.getAssociated_ID());
+                List<TaskBean> tasks = FileUtil.loadTasks(userInfo.getAssociated_ID());
                 tasksTable.getItems().setAll(tasks);
-                FileUtil.getGoal(userSession.getAssociated_ID(), SavingGoal);
+                FileUtil.getGoal(userInfo.getAssociated_ID(), SavingGoal);
             }
         }
     }
@@ -110,16 +110,16 @@ public class TasksGoalController {
     @FXML
     private void onDeletClicked() {
         String taskNumberToDelete = taskNum.getText().trim();
-        List<TaskBean> tasks = FileUtil.loadTasks(UserSessionBean.getInstance().getAssociated_ID());
+        List<TaskBean> tasks = FileUtil.loadTasks(UserInfoBean.getInstance().getAssociated_ID());
         List<TaskBean> updatedTasks = new ArrayList<>();
         boolean decrementFollowingTasks = false;
 
         for (TaskBean task : tasks) {
-            if (task.getTaskNumber().equals(taskNumberToDelete) && task.getID().equals(UserSessionBean.getInstance().getAssociated_ID())) {
+            if (task.getTaskNumber().equals(taskNumberToDelete) && task.getID().equals(UserInfoBean.getInstance().getAssociated_ID())) {
                 decrementFollowingTasks = true; // Mark to start decrementing task numbers
                 continue; // Skip adding this task to updatedTasks
             }
-            if (decrementFollowingTasks && task.getID().equals(UserSessionBean.getInstance().getAssociated_ID())) {
+            if (decrementFollowingTasks && task.getID().equals(UserInfoBean.getInstance().getAssociated_ID())) {
                 // Decrement the task number by 1 for all subsequent tasks of the same child ID
                 int newTaskNumber = Integer.parseInt(task.getTaskNumber()) - 1;
                 task.setTaskNumber(String.valueOf(newTaskNumber));
@@ -144,7 +144,7 @@ public class TasksGoalController {
 
     @FXML
     private void onSetSavingGoalClicked(){
-        FileUtil.updateGoal(UserSessionBean.getInstance().getID(), savingGoalField.getText());
+        FileUtil.updateGoal(UserInfoBean.getInstance().getID(), savingGoalField.getText());
         if (!savingGoalField.getText().isEmpty()) {
             currentGoalField.setText(savingGoalField.getText());
         }
@@ -153,8 +153,8 @@ public class TasksGoalController {
 
     @FXML
     private void onBackClicked() {
-        UserSessionBean userSession = UserSessionBean.getInstance();
-        if (userSession.getRole().equals("Child")){
+        UserInfoBean userInfo = UserInfoBean.getInstance();
+        if (userInfo.getRole().equals("Child")){
             Utils.showPage("Child_MainPage.fxml", btnBack);
         } else {
             Utils.showPage("Parent_MainPage.fxml", btnBack);

@@ -43,19 +43,19 @@ public class MainPageController {
      */
 
     public void initialize() {
-        String username = UserSessionBean.getInstance().getUserName();
+        String username = UserInfoBean.getInstance().getUserName();
         labelWelcome.setText("Welcome, " + username + ", Please Select Service!");
     }
 
     @FXML
     private void onLogoutClicked() {
-        UserSessionBean.cleanUserSession();
+        UserInfoBean.cleanUserSession();
         Utils.showPage("Login.fxml", btnLogout);
     }
 
     @FXML
     private void onCheckAccountInfoClicked() {
-        if (UserSessionBean.getInstance().getRole().equals("Parent")){
+        if (UserInfoBean.getInstance().getRole().equals("Parent")){
             Utils.showPage("Parent_InfoPage.fxml", btnAccountInfo);
         } else {
             Utils.showPage("Child_InfoPage.fxml", btnAccountInfo);

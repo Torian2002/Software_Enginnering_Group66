@@ -27,11 +27,11 @@ public class RelateChildController {
 
     @FXML
     private void initialize() {
-        UserSessionBean userSession = UserSessionBean.getInstance();
-        if (userSession.getAssociated_child().equals(" ")) {
+        UserInfoBean userInfo = UserInfoBean.getInstance();
+        if (userInfo.getAssociated_child().equals(" ")) {
             currentChild.setText("You don't have any associated goal");
         } else{
-            currentChild.setText(userSession.getAssociated_child());
+            currentChild.setText(userInfo.getAssociated_child());
         }
 
     }
@@ -41,7 +41,7 @@ public class RelateChildController {
         String Associated_child = childName.getText().trim();
         String password = passwordField.getText().trim();
 
-        UserSessionBean usersession = UserSessionBean.getInstance();
+        UserInfoBean userInfo = UserInfoBean.getInstance();
 
         try {
             List<String[]> users = Files.lines(Paths.get(Utils.CSV_FILE_PATH_userInfo))
@@ -65,15 +65,15 @@ public class RelateChildController {
                 return;
             }
 
-            if (!password.equals(UserSessionBean.getInstance().getPassword())) {
+            if (!password.equals(UserInfoBean.getInstance().getPassword())) {
                 Utils.showAlert("Error", "Password is incorrect.", Alert.AlertType.ERROR);
                 passwordField.clear();
                 return;
             }
 
-            usersession.setAssociated_child(Associated_child);
-            usersession.setAssociated_ID(Associated_ID);
-            updateUserInfo(users, usersession);
+            userInfo.setAssociated_child(Associated_child);
+            userInfo.setAssociated_ID(Associated_ID);
+            updateUserInfo(users, userInfo);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -86,19 +86,19 @@ public class RelateChildController {
         Utils.showPage("Parent_MainPage.fxml", btnBack);
     }
 
-    private void updateUserInfo(List<String[]> users, UserSessionBean usersession) throws IOException {
+    private void updateUserInfo(List<String[]> users, UserInfoBean userInfo) throws IOException {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(Utils.CSV_FILE_PATH_userInfo))) {
             for (String[] user : users) {
-                if (user[0].equals(usersession.getID())) {
-                    user[5] = usersession.getAssociated_child();
-                    user[6] = usersession.getAssociated_ID(); // Assuming associate child ID at index 3
+                if (user[0].equals(userInfo.getID())) {
+                    user[5] = userInfo.getAssociated_child();
+                    user[6] = userInfo.getAssociated_ID(); // Assuming associate child ID at index 3
                 }
                 writer.write(String.join(",", user));
                 writer.newLine();
             }
             passwordField.clear();
             childName.clear();
-            currentChild.setText(usersession.getAssociated_child());
+            currentChild.setText(userInfo.getAssociated_child());
             Utils.showAlert("Congratulation", "Relate to your child successfully", Alert.AlertType.INFORMATION);
         }
     }

@@ -21,7 +21,7 @@ public class AddTaskController {
         String rewardStr = Reward.getText().trim();
         String password = passwordField.getText();
 
-        if (!UserSessionBean.getInstance().getAssociated_child().equals(" ")){
+        if (!UserInfoBean.getInstance().getAssociated_child().equals(" ")){
             if (content.isEmpty()) {
                 Utils.showAlert("Validation Error", "Task content cannot be empty.", Alert.AlertType.ERROR);
                 TaskContent.clear();
@@ -38,18 +38,18 @@ public class AddTaskController {
                 return;
             }
 
-            if (!password.equals(UserSessionBean.getInstance().getPassword())) {
+            if (!password.equals(UserInfoBean.getInstance().getPassword())) {
                 Utils.showAlert("Authentication Error", "Incorrect password.", Alert.AlertType.ERROR);
                 passwordField.clear();
                 return;
             }
 
             // Load existing tasks to determine the new task number
-            List<TaskBean> existingTasks = FileUtil.loadTasks(UserSessionBean.getInstance().getAssociated_ID());
+            List<TaskBean> existingTasks = FileUtil.loadTasks(UserInfoBean.getInstance().getAssociated_ID());
             int newTaskNum = existingTasks.size() + 1;
 
             // Create new task
-            TaskBean newTask = new TaskBean(UserSessionBean.getInstance().getAssociated_ID(), Integer.toString(newTaskNum), content, rewardStr, "To be finished");
+            TaskBean newTask = new TaskBean(UserInfoBean.getInstance().getAssociated_ID(), Integer.toString(newTaskNum), content, rewardStr, "To be finished");
             existingTasks.add(newTask);
             FileUtil.updateTasks(existingTasks,  "Add");
             Utils.showAlert("Success", "New task added successfully.", Alert.AlertType.INFORMATION);

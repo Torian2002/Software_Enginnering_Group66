@@ -35,25 +35,25 @@ public class AccountInfoController {
     private TextField currentChild;
 
     public void initialize() {
-        UserSessionBean userSessionBean = UserSessionBean.getInstance();
-        loadUserData(userSessionBean);
+        UserInfoBean userInfoBean = UserInfoBean.getInstance();
+        loadUserData(userInfoBean);
     }
 
-    private void loadUserData(UserSessionBean userSession) {
-        nameField.setText(userSession.getUserName());
-        roleField.setText(userSession.getRole());
+    private void loadUserData(UserInfoBean userInfo) {
+        nameField.setText(userInfo.getUserName());
+        roleField.setText(userInfo.getRole());
 
-        if ("Child".equals(userSession.getRole())) {
-            HashMap<String, String> data = readMoneyInfoCsv(String.valueOf(userSession.getID()));
+        if ("Child".equals(userInfo.getRole())) {
+            HashMap<String, String> data = readMoneyInfoCsv(String.valueOf(userInfo.getID()));
             updateFields(data);
-        } else if ("Parent".equals(userSession.getRole())) {
-            HashMap<String, String> userInfo = readUserInfoCsv(userSession.getID());
-            if (userInfo != null && !userInfo.get("Associated_ID").equals(" ")) {
-                userSession.setAssociated_child(userInfo.get("Associated_child"));
-                userSession.setAssociated_ID(userInfo.get("Associated_ID"));
-                HashMap<String, String> data = readMoneyInfoCsv(userInfo.get("Associated_ID"));
+        } else if ("Parent".equals(userInfo.getRole())) {
+            HashMap<String, String> userAssociation = readUserInfoCsv(userInfo.getID());
+            if (userAssociation != null && !userAssociation.get("Associated_ID").equals(" ")) {
+                userInfo.setAssociated_child(userAssociation.get("Associated_child"));
+                userInfo.setAssociated_ID(userAssociation.get("Associated_ID"));
+                HashMap<String, String> data = readMoneyInfoCsv(userAssociation.get("Associated_ID"));
                 updateFields(data);
-                currentChild.setText(userSession.getAssociated_child());
+                currentChild.setText(userInfo.getAssociated_child());
             } else {
                 Utils.showAlert("Alert", "You should relate to your child first.", Alert.AlertType.ERROR);
                 currentChild.setText("You don't have any associated goal");

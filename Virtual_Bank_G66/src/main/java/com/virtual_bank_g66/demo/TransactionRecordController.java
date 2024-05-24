@@ -32,14 +32,14 @@ public class TransactionRecordController {
     @FXML
     public void initialize() {
         if (Title.getText().equals("Transaction Record")){
-            UserSessionBean userSessionBean = UserSessionBean.getInstance();
-            if (userSessionBean.getRole().equals("Child")){
-                usernameField.setText("Account Name: "+ userSessionBean.getUserName());
-                FileUtil.loadTransactionRecord(userSessionBean.getID(), transactionTable);
+            UserInfoBean userInfoBean = UserInfoBean.getInstance();
+            if (userInfoBean.getRole().equals("Child")){
+                usernameField.setText("Account Name: "+ userInfoBean.getUserName());
+                FileUtil.loadTransactionRecord(userInfoBean.getID(), transactionTable);
             } else {
-                if (!userSessionBean.getAssociated_child().equals(" ")) {
-                    usernameField.setText("Child's Name: "+ userSessionBean.getAssociated_child());
-                    FileUtil.loadTransactionRecord(userSessionBean.getAssociated_ID(), transactionTable);
+                if (!userInfoBean.getAssociated_child().equals(" ")) {
+                    usernameField.setText("Child's Name: "+ userInfoBean.getAssociated_child());
+                    FileUtil.loadTransactionRecord(userInfoBean.getAssociated_ID(), transactionTable);
                 } else {
                     Utils.showAlert("Error", "You should relate to your child first.", Alert.AlertType.ERROR);
                 }
@@ -74,8 +74,8 @@ public class TransactionRecordController {
     // return logic for transaction record page(this page is provided for both parent and children)
     @FXML
     private void onReturnClicked(ActionEvent event) {
-      UserSessionBean userSessionBean = UserSessionBean.getInstance();
-      if (userSessionBean.getRole().equals("Child")){
+      UserInfoBean userInfoBean = UserInfoBean.getInstance();
+      if (userInfoBean.getRole().equals("Child")){
           Utils.showPage("Transaction.fxml", btnReturn);
       } else {
           Utils.showPage("Parent_MainPage.fxml", btnReturn);
