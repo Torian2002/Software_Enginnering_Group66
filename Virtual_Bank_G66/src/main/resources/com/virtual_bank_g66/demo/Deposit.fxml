@@ -27,17 +27,25 @@
             </items>
         </ComboBox>
 
-        <Label text="Amount:" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-        <TextField fx:id="amountField" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+        <Label text="Current Interest Rate:" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <TextField text="2.5% per year" GridPane.rowIndex="1" GridPane.columnIndex="2" editable="false"/>
 
-        <Label text="Description:" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-        <TextField fx:id="descriptionField" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+        <Label text="Saving Interest Rate:" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <TextField text="5% per year" GridPane.rowIndex="2" GridPane.columnIndex="2" editable="false"/>
 
-        <Label text="Time Limit:" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-        <TextField fx:id="timeLimitField" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+        <Label text="Saving period:" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        <TextField text="60 Days" GridPane.rowIndex="3" GridPane.columnIndex="2" editable="false"/>
 
-        <Label text="Enter Your Password:" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-        <PasswordField fx:id="passwordField" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+        <Label text="Amount:" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+        <TextField fx:id="amountField" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+
+        <Label text="Description:" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+        <TextField fx:id="descriptionField" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
+
+        <Label text="Enter Your Password:" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+        <PasswordField fx:id="passwordField" GridPane.rowIndex="6" GridPane.columnIndex="2"/>
+
+
 
     </GridPane>
 

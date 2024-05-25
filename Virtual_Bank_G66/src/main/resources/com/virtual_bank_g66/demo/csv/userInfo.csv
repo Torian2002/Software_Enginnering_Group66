@@ -1,8 +1,1 @@
 ID,Role,Name,password,mail,Associated_child,Associated_ID
-1,Parent,zkx,1,22222, 
-2,Child,tong,1,tongjiabo@bupt.edu.cn, , 
-4,Parent,hzh,1,1, , 
-5,Parent,tjb,1,tongjiabo@bupt.edu.cn,tong,2
-6,Child,2,2,2, , 
-7,Child,torian,1,1234@gmail.com, 
-8,Child,tongjb,1,1, , 

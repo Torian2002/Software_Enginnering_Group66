@@ -12,11 +12,12 @@
             <padding>
                 <Insets top="100" right="80" bottom="60" left="80"/>
             </padding>
-            <Label text="Account Creation" style="-fx-font-size: 30; -fx-font-weight: bold;">
-                <font>
-                    <Font size="30.0" />
-                </font>
-            </Label>
+
+            <Label text="Account Creation" style="-fx-font-size: 30; -fx-font-weight: bold;" />
+            <Label text="Password must be between five and nine characters long;" style="-fx-font-size: 15; -fx-font-weight: bold;" />
+            <Label text="contain only letters and digits(letters: a-z and A-Z, digits: 0-9); " style="-fx-font-size: 15; -fx-font-weight: bold;" />
+            <Label text="contain at least one letter and one digit;" style="-fx-font-size: 15; -fx-font-weight: bold;" />
+
             <GridPane hgap="20" vgap="20" alignment="CENTER">
                 <Label text="Role:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
                 <ComboBox fx:id="roleComboBox" promptText="Choose Your Role" prefWidth="225" GridPane.rowIndex="0" GridPane.columnIndex="1">

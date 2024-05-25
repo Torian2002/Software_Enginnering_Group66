@@ -11,6 +11,10 @@ public class MoneyInfoBean {
     private LocalDateTime initialDate;
     private LocalDateTime expireDate;
 
+
+
+    private LocalDateTime Log_day;
+
     public MoneyInfoBean(float current, float saving, float goal, int timeLimit, LocalDateTime initialDate, LocalDateTime expireDate) {
         this.Current = current;
         this.Saving = saving;
@@ -18,6 +22,14 @@ public class MoneyInfoBean {
         this.timeLimit = timeLimit;
         this.initialDate = initialDate;
         this.expireDate = expireDate;
+    }
+
+    public LocalDateTime getLog_day() {
+        return Log_day;
+    }
+
+    public void setLog_day(LocalDateTime log_day) {
+        Log_day = log_day;
     }
 
     public float getCurrent() {

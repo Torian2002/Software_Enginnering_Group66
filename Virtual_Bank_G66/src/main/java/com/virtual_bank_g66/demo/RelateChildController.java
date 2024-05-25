@@ -23,7 +23,8 @@ public class RelateChildController {
     @FXML
     private Button btnBack;
 
-
+    Utils Utils = new Utils();
+    FileUtil FileUtil = new FileUtil();
 
     @FXML
     private void initialize() {

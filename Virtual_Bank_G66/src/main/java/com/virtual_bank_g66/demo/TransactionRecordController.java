@@ -29,6 +29,9 @@ public class TransactionRecordController {
     @FXML
     private Text Title;
 
+    Utils Utils = new Utils();
+    FileUtil FileUtil = new FileUtil();
+
     @FXML
     public void initialize() {
         if (Title.getText().equals("Transaction Record")){

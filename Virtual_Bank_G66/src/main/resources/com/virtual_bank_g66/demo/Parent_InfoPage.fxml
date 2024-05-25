@@ -30,9 +30,11 @@
 
         <Label text="Your current child:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
         <TextField fx:id="currentChild" GridPane.rowIndex="2" GridPane.columnIndex="1" editable="false"/>
+        <Text text="Interest rate: 2.5% per year"  GridPane.rowIndex="2" GridPane.columnIndex="3"/>
 
         <Label text="Child's Current Account:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
         <TextField fx:id="currentAccountField" GridPane.rowIndex="3" GridPane.columnIndex="1" text="No children yet" editable="false"/>
+        <Text text="Interest rate: 5% per year"  GridPane.rowIndex="3" GridPane.columnIndex="3"/>
 
         <Label text="Child's Saving Account:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
         <TextField fx:id="savingAccountField" GridPane.rowIndex="4" GridPane.columnIndex="1" text="No children yet" editable="false"/>

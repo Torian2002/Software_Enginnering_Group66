@@ -14,28 +14,28 @@ import java.time.LocalDateTime;
 public class DepositAndWithdrawalController {
 
     @FXML
-    private TextField amountField;
+    protected TextField amountField;
 
     @FXML
-    private TextField descriptionField;
+    protected TextField descriptionField;
 
     @FXML
-    private PasswordField passwordField;
+    protected PasswordField passwordField;
 
     @FXML
-    private TextField timeLimitField;
+    protected Button btnBack;
 
     @FXML
-    private Button btnBack;
+    protected ComboBox<String> roleComboBox;
 
     @FXML
-    private ComboBox<String> roleComboBox;
+    protected Text ServiceType;
+
+    Utils Utils = new Utils();
+    FileUtil FileUtil = new FileUtil();
 
     @FXML
-    private Text ServiceType;
-
-    @FXML
-    private void handleConfirm(ActionEvent event) {
+    protected void handleConfirm(ActionEvent event) {
 
         UserInfoBean userInfo = UserInfoBean.getInstance();
         String serviceType = ServiceType.getText();
@@ -43,7 +43,6 @@ public class DepositAndWithdrawalController {
         String description = descriptionField.getText();
         String password = passwordField.getText();
 
-// Check all inputs are not null and not empty. Improved by handling potential null values from ComboBox and TextFields.
         if (serviceType == null || serviceType.isEmpty() ||
                 accountType == null || accountType.trim().isEmpty() ||
                 description == null || description.isEmpty() ||
@@ -53,21 +52,30 @@ public class DepositAndWithdrawalController {
         } else {
 
             try {
-                float amount = Float.parseFloat(amountField.getText()); // Parsing to check if the amount is a valid float.
+                float amount = Float.parseFloat(amountField.getText());
 
 
                 if (!password.equals(userInfo.getPassword())) {
                     Utils.showAlert("Error", "Original password is incorrect.", Alert.AlertType.ERROR);
+                    passwordField.clear();
+                    descriptionField.clear();
+                    amountField.clear();
                     return;
                 }
 
                 if (!updateAccountDetails(userInfo.getID(), serviceType, accountType, amount)) {
-                    Utils.showAlert("Error", "Failed to update account details.", Alert.AlertType.ERROR);
+                    passwordField.clear();
+                    descriptionField.clear();
+                    amountField.clear();
+//                    Utils.showAlert("Error", "Failed to update account details.", Alert.AlertType.ERROR);
                     return;
                 }
 
                 logTransaction(userInfo.getID(), LocalDateTime.now(), amount, accountType, serviceType, description);
                 Utils.showAlert("Congratulations", "Transaction successful.", Alert.AlertType.INFORMATION);
+                passwordField.clear();
+                descriptionField.clear();
+                amountField.clear();
             } catch (NumberFormatException e) {
                 Utils.showAlert("Error", "Invalid amount. Please enter a valid number.", Alert.AlertType.ERROR);
             }
@@ -123,31 +131,35 @@ public class DepositAndWithdrawalController {
     }
 
     private boolean processAccountLine(String[] values, String serviceType, String accountType, float amount) {
-
         float currentAmount = Float.parseFloat(values[1]);
         float savingAmount = Float.parseFloat(values[2]);
         float limit = Float.parseFloat(values[3]);
         String timeLimit = values[5];
         String initialDateStr = values[6];
-        String expireDateStr = values[7];
+        String MatureDateStr = values[7];
 
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-        if ("Withdrawal".equals(serviceType) && amount > limit) {
-            Utils.showAlert("Sorry", "Exceed your account limitation.", Alert.AlertType.INFORMATION);
-            return false;
-        }
+        if ("withdrawal".equalsIgnoreCase(serviceType)) {
+            if (amount > limit && limit != 0) {
+                Utils.showAlert("Sorry", "Exceed your account limitation.", Alert.AlertType.INFORMATION);
+                return false;
+            }
 
-        if ("Withdrawal".equals(serviceType)) {
             if ("Current".equals(accountType) && currentAmount >= amount) {
                 values[1] = String.format("%.2f", currentAmount - amount);
-            } else if ("Saving".equals(accountType) && savingAmount >= amount) {
-                LocalDateTime expireDate = LocalDateTime.parse(expireDateStr, formatter);
-                if (now.isBefore(expireDate)) {
-                    Utils.showAlert("Sorry", "Savings account funds are not yet available for withdrawal.", Alert.AlertType.INFORMATION);
+            } else if ("Saving".equals(accountType)) {
+                if(values[7].equals(" ")){
+                    Utils.showAlert("Sorry", "Insufficient funds.", Alert.AlertType.INFORMATION);
                     return false;
-                } else {
+                }
+
+                LocalDateTime expireDate = LocalDateTime.parse(values[7], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                if (now.isBefore(expireDate)) {
+                    long daysUntilMatured = java.time.Duration.between(now, expireDate).toDays();
+                    Utils.showAlert("Sorry", "Savings account funds are not yet available for withdrawal. Matured time is: " + values[7] + ". There are " + daysUntilMatured + " days remaining.", Alert.AlertType.INFORMATION);
+                    return false;
+                } else if (savingAmount >= amount) {
                     values[2] = String.format("%.2f", savingAmount - amount);
                 }
             } else {
@@ -155,26 +167,32 @@ public class DepositAndWithdrawalController {
                 return false;
             }
         } else {
+
+            if (values[8].equals(" ")) {
+                values[8] = Utils.formatDateTime(now);
+            }
+
             if ("Current".equals(accountType)) {
                 values[1] = String.format("%.2f", currentAmount + amount);
-            } else {
-
+            } else if ("Saving".equals(accountType)) {
                 values[2] = String.format("%.2f", savingAmount + amount);
-                LocalDateTime initialDate = now;
-                int timeLimitDays = Integer.parseInt(timeLimit);
-                LocalDateTime expireDate = initialDate.plusDays(timeLimitDays);
 
-                values[6] = initialDate.format(formatter);
-                values[7] = expireDate.format(formatter);
+                if ((initialDateStr.equals(" ") && MatureDateStr.equals(" "))) {
+
+                    int timeLimitDays = Integer.parseInt(timeLimit);
+                    LocalDateTime expireDate = now.plusDays(timeLimitDays);
+                    values[6] = Utils.formatDateTime(now);
+                    values[7] = Utils.formatDateTime(expireDate);
+                }
             }
         }
         return true;
     }
 
+
     private void logTransaction(String userId, LocalDateTime dateTime, float amount, String accountType, String serviceType, String description) {
         File transactionFile = new File(Utils.CSV_FILE_PATH_transactionRecord);
 
-        // Check if the file exists and is not a directory; create it with headers if it doesn't exist
         if (!transactionFile.exists()) {
             try (BufferedWriter bw = new BufferedWriter(new FileWriter(transactionFile))) {
                 // Write the headers for the CSV file

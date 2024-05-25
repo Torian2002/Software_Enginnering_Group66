@@ -7,6 +7,7 @@
 
 
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
 <VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.virtual_bank_g66.demo.AccountInfoController"
       prefWidth="800" prefHeight="600" spacing="20" alignment="TOP_CENTER">
@@ -29,15 +30,18 @@
 
         <Label text="Current Account:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
         <TextField fx:id="currentAccountField" GridPane.rowIndex="2" GridPane.columnIndex="1" text="0" editable="false"/>
+        <Text text="Interest rate: 2.5% per year"  GridPane.rowIndex="2" GridPane.columnIndex="3"/>
 
         <Label text="Saving Account:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
         <TextField fx:id="savingAccountField" GridPane.rowIndex="3" GridPane.columnIndex="1" text="0" editable="false"/>
+        <Text text="Interest rate: 5% per year"  GridPane.rowIndex="3" GridPane.columnIndex="3"/>
+
 
         <Label text="Limit:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
         <TextField fx:id="limitField" GridPane.rowIndex="4" GridPane.columnIndex="1" text="0" editable="false"/>
 
         <Label text="Community:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-        <Button text="Check" fx:id="btnCheckCommunity" minWidth="70" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+        <Button text="Check"  minWidth="70" GridPane.rowIndex="5" GridPane.columnIndex="1" onAction="#onCheckClicked"/>
     </GridPane>
     <HBox spacing="25" alignment="CENTER">
         <Button text="Edit" fx:id="btnEdit" onAction="#onEditClicked" minWidth="70"/>

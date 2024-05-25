@@ -28,6 +28,9 @@ public class EditInfoController {
     @FXML
     private Button btnBack;
 
+    Utils Utils = new Utils();
+    FileUtil FileUtil = new FileUtil();
+
     @FXML
     public void initialize() {
         loadCurrentUserInfo();

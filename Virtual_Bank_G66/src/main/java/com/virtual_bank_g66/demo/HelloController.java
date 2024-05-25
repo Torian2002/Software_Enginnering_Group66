@@ -25,6 +25,9 @@ public class HelloController {
     @FXML
     private Button createAccountButton;
 
+    Utils Utils = new Utils();
+    FileUtil FileUtil = new FileUtil();
+
     @FXML
     void switchToAccountCreation(ActionEvent event) {
         try {

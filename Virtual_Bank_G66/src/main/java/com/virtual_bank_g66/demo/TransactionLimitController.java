@@ -22,6 +22,8 @@ public class TransactionLimitController {
     @FXML
     private Button btnBack;
 
+    Utils Utils = new Utils();
+    FileUtil FileUtil = new FileUtil();
 
     @FXML
     private void initialize() {

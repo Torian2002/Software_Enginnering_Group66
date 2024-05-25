@@ -12,12 +12,65 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileUtil {
 
-    public static void ensureFileExists(String filePath) {
+    Utils Utils = new Utils();
+    
+    public HashMap<String, String> readMoneyInfoCsv(String id) {
+        String line;
+        HashMap<String, String> data = new HashMap<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(Utils.CSV_FILE_PATH_moneyInfo))) {
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                if (values[0].equals(id)) {
+                    data.put("Current", values[1]);
+                    data.put("Saving", values[2]);
+                    data.put("Goal", values[3]);
+                    data.put("LastLogin", values[8]);
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+
+    public void writeMoneyInfoCsv(String id, HashMap<String, String> data) {
+        String line;
+        List<String> fileContent = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(Utils.CSV_FILE_PATH_moneyInfo))) {
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                if (values[0].equals(id)) {
+                    values[1] = data.get("Current");
+                    values[2] = data.get("Saving");
+                    values[3] = data.get("Goal");
+                    values[8] = data.get("LastLogin");
+                    line = String.join(",", values);
+                }
+                fileContent.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(Utils.CSV_FILE_PATH_moneyInfo))) {
+            for (String s : fileContent) {
+                bw.write(s + System.lineSeparator());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void ensureFileExists(String filePath) {
         File file = new File(filePath);
         try {
             if (!file.exists()) {
@@ -28,7 +81,7 @@ public class FileUtil {
             throw new RuntimeException("Unable to create the file: " + filePath);
         }
     }
-    public static void getLimit(String ID, TextField limitTextField)
+    public void getLimit(String ID, TextField limitTextField)
     {
         try {
             List<String[]> lines = Files.lines(Paths.get(Utils.CSV_FILE_PATH_moneyInfo))
@@ -46,7 +99,7 @@ public class FileUtil {
         }
     }
 
-    public static void getGoal(String ID, TextField GoalTextField)
+    public void getGoal(String ID, TextField GoalTextField)
     {
         try {
             List<String[]> lines = Files.lines(Paths.get(Utils.CSV_FILE_PATH_moneyInfo))
@@ -64,7 +117,7 @@ public class FileUtil {
         }
     }
 
-    public static void getGoal(String ID, Text GoalTextField)
+    public  void getGoal(String ID, Text GoalTextField)
     {
         try {
             List<String[]> lines = Files.lines(Paths.get(Utils.CSV_FILE_PATH_moneyInfo))
@@ -83,7 +136,7 @@ public class FileUtil {
     }
 
 
-    public static void updateGoal(String ID, String goal) {
+    public  void updateGoal(String ID, String goal) {
         Path filePath = Paths.get(Utils.CSV_FILE_PATH_moneyInfo); // Ensure Utils.CSV_FILE_PATH_moneyInfo is the correct path to the CSV file.
         if (goal == null || goal.isEmpty()){
             Utils.showAlert("Error", "Invalid input please enter again: " , Alert.AlertType.ERROR);
@@ -127,7 +180,7 @@ public class FileUtil {
     }
 
 
-    public static void loadTransactionRecord(String ID, TableView<TransactionRecordBean> transactionTable) {
+    public  void loadTransactionRecord(String ID, TableView<TransactionRecordBean> transactionTable) {
         ObservableList<TransactionRecordBean> transactionRecordBeans = FXCollections.observableArrayList();
 
         try (BufferedReader br = new BufferedReader(new FileReader(Utils.CSV_FILE_PATH_transactionRecord))) {
@@ -144,7 +197,7 @@ public class FileUtil {
         transactionTable.setItems(transactionRecordBeans);
     }
 
-    public static List<TaskBean> loadTasks(String ID) {
+    public  List<TaskBean> loadTasks(String ID) {
         String filePath = Utils.CSV_FILE_PATH_tasks;
         ensureFileExists(filePath);
         List<TaskBean> tasks = new ArrayList<>();
@@ -163,7 +216,7 @@ public class FileUtil {
         return tasks;
     }
 
-    public static void updateTasks(List<TaskBean> updatedTasks, String service) {
+    public  void updateTasks(List<TaskBean> updatedTasks, String service) {
         String filePath = Utils.CSV_FILE_PATH_tasks;
         File file = new File(filePath);
         if (!file.exists()) {
@@ -220,7 +273,7 @@ public class FileUtil {
     }
 
 
-    public static void sendRewardToChild(String ID, String Reward) {
+    public  void sendRewardToChild(String ID, String Reward) {
         String filePath = Utils.CSV_FILE_PATH_moneyInfo;
         File file = new File(filePath);
         if (!file.exists()) {

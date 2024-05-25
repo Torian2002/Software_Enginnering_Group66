@@ -1,7 +1,1 @@
 ID,TaskNum,TaskContent,Reward,State
-3,4,testing the function 1,100,To be finished
-2,1,testing the function 2,1314,Already done
-2,2,testing the function 3,130,Already done
-2,3,testing the function 4,140,To be confirmed
-2,4,testing confirm function,100,To be confirmed
-2,5,1,1,To be finished

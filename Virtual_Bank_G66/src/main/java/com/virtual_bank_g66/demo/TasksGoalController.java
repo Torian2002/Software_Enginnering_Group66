@@ -37,6 +37,9 @@ public class TasksGoalController {
     @FXML
     private TextField taskNum;
 
+    Utils Utils = new Utils();
+    FileUtil FileUtil = new FileUtil();
+
     public void initialize() {
         taskNumberColumn.setCellValueFactory(new PropertyValueFactory<>("taskNumber"));
         taskContentColumn.setCellValueFactory(new PropertyValueFactory<>("taskContent"));
@@ -64,7 +67,7 @@ public class TasksGoalController {
         }
     }
 
-    private static class ButtonCell extends TableCell<TaskBean, String> {
+    private class ButtonCell extends TableCell<TaskBean, String> {
         private final Button btn;
         private final String State;
 

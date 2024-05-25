@@ -37,6 +37,9 @@ public class MainPageController {
     @FXML
     private Button btnSetTasksForChild;
 
+    Utils Utils = new Utils();
+    FileUtil FileUtil = new FileUtil();
+
 
     /*
     The following are the common functions

@@ -14,6 +14,9 @@ public class AddTaskController {
     @FXML
     private PasswordField passwordField;
 
+    Utils Utils = new Utils();
+    FileUtil FileUtil = new FileUtil();
+
     @FXML
     private void onConfirmClicked() {
         String content = TaskContent.getText().trim();
