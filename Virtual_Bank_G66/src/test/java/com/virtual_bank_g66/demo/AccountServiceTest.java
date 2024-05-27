@@ -7,6 +7,19 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Test class for AccountService.
+ * <p>
+ * This class contains unit tests for validating the AccountService functionalities including
+ * account creation, password validation, and handling missing or duplicate account information.
+ * </p>
+ * 
+ * @version 1.0 Partition test the validity of the password
+ * @version 2.0 A series of tests to supplement account creation
+ * @author Jiabo Tong
+ * @author Kexing Zhang
+ */
+
 public class AccountServiceTest {
 
     private AccountService accountService;
