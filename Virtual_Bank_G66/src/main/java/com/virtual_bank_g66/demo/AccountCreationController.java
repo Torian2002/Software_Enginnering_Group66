@@ -19,7 +19,7 @@ import javafx.stage.Stage;
  * @version 1.0 April 10th, 2024 - achieve basic requirements to create child/parent account
  * @version 2.0 April 24th, 2024 - introduce utility classes when refactoring code
  * @author Jiabo Tong
- * @author Ruoqi Liu
+ * @author KeXing Zhang
  */
 
 public class AccountCreationController {
