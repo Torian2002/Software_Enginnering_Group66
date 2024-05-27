@@ -18,7 +18,7 @@ import java.io.IOException;
  * @version 1.0 April 10th, 2024 - relate to login function
  * @version 2.0 April 24th, 2024 - introduce utility classes when refactoring code
  * @author Jiabo Tong
- * @author Kexin Zhang
+ * @author Ruoqi Liu
  */
 public class HelloController {
 
