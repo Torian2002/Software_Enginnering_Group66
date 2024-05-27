@@ -8,6 +8,16 @@ import javafx.scene.text.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The TasksGoalController class manages the tasks and savings goals
+ * for both parents and children. It handles the initialization of the
+ * task table, task-related actions (add, delete, finish, confirm),
+ * and setting savings goals.
+ *
+ * @version 5.0 May 25th, 2024
+ * @author Jiabo Tong
+ * @author Kexin Zhang
+ */
 public class TasksGoalController {
     @FXML
     private TableView<TaskBean> tasksTable;
@@ -40,6 +50,9 @@ public class TasksGoalController {
     Utils Utils = new Utils();
     FileUtil FileUtil = new FileUtil();
 
+    /**
+     * Initializes the task table columns and loads the tasks.
+     */
     public void initialize() {
         taskNumberColumn.setCellValueFactory(new PropertyValueFactory<>("taskNumber"));
         taskContentColumn.setCellValueFactory(new PropertyValueFactory<>("taskContent"));
@@ -48,6 +61,10 @@ public class TasksGoalController {
         loadTasks();
     }
 
+    /**
+     * Loads the tasks for the user and sets the appropriate cell factory
+     * for the action column based on the user's role.
+     */
     private void loadTasks() {
         UserInfoBean userInfo = UserInfoBean.getInstance();
         if (userInfo.getRole().equals("Child")){
@@ -67,10 +84,18 @@ public class TasksGoalController {
         }
     }
 
+    /**
+     * A TableCell implementation that adds a button to each cell.
+     * The button's action depends on the task state and user role.
+     */
     private class ButtonCell extends TableCell<TaskBean, String> {
         private final Button btn;
         private final String State;
 
+        /**
+         * A TableCell implementation that adds a button to each cell.
+         * The button's action depends on the task state and user role.
+         */
         public ButtonCell(String btnName, String State)
         {
             this.btn = new Button(btnName);
@@ -98,6 +123,12 @@ public class TasksGoalController {
             });
         }
 
+        /**
+         * Updates the item within the TableCell.
+         *
+         * @param item the item to update
+         * @param empty whether the cell is empty
+         */
         @Override
         protected void updateItem(String item, boolean empty) {
             super.updateItem(item, empty);
@@ -110,6 +141,10 @@ public class TasksGoalController {
         }
     }
 
+    /**
+     * Deletes the selected task and updates the task numbers
+     * for the remaining tasks.
+     */
     @FXML
     private void onDeletClicked() {
         String taskNumberToDelete = taskNum.getText().trim();
@@ -139,12 +174,17 @@ public class TasksGoalController {
         }
     }
 
+    /**
+     * Navigates to the Add Task page.
+     */
     @FXML
     private void onADDClicked(){
         Utils.showPage("AddTaskPage.fxml", btnAdd);
     }
 
-
+    /**
+     * Sets the saving goal for the user and updates the displayed goal.
+     */
     @FXML
     private void onSetSavingGoalClicked(){
         FileUtil.updateGoal(UserInfoBean.getInstance().getID(), savingGoalField.getText());
@@ -154,6 +194,9 @@ public class TasksGoalController {
         savingGoalField.clear();
     }
 
+    /**
+     * Navigates back to the main page based on the user's role.
+     */
     @FXML
     private void onBackClicked() {
         UserInfoBean userInfo = UserInfoBean.getInstance();

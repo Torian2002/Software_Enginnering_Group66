@@ -9,6 +9,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
 
+/**
+ * The EditInfoController class is responsible for handling the user interface
+ * logic for editing user information. It allows users to update their name,
+ * email, and password.
+ *
+ * @version 5.0 May 25th, 2024
+ * @author Jiabo Tong
+ * @author Ruoqi Liu
+ */
 public class EditInfoController {
     @FXML
     private TextField editNameField;

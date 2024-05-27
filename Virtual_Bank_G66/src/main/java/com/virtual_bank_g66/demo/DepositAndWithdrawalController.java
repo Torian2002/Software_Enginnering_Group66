@@ -10,7 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
 
-
+/**
+ * The DepositAndWithdrawalController class handles deposit and withdrawal transactions
+ * for both current and saving accounts. It validates user input, processes transactions,
+ * and logs the transaction details.
+ *
+ * @version 5.0 May 25th, 2024
+ * @author Jiabo Tong
+ * @author Jiameng Chen
+ */
 public class DepositAndWithdrawalController {
 
     @FXML
@@ -34,6 +42,12 @@ public class DepositAndWithdrawalController {
     Utils Utils = new Utils();
     FileUtil FileUtil = new FileUtil();
 
+    /**
+     * Handles the confirm button click event. Validates the user input,
+     * updates account details, and logs the transaction if validation is successful.
+     *
+     * @param event the action event triggered by clicking the confirm button
+     */
     @FXML
     protected void handleConfirm(ActionEvent event) {
 
@@ -83,6 +97,16 @@ public class DepositAndWithdrawalController {
 
     }
 
+    /**
+     * Updates the account details based on the transaction type (deposit or withdrawal)
+     * and account type (current or saving).
+     *
+     * @param userId the ID of the user
+     * @param serviceType the type of service (deposit or withdrawal)
+     * @param accountType the type of account (current or saving)
+     * @param amount the amount to be deposited or withdrawn
+     * @return true if the account details were successfully updated, false otherwise
+     */
     private boolean updateAccountDetails(String userId, String serviceType, String accountType, float amount) {
         List<String> fileContent = new ArrayList<>();
         boolean accountExist = false;
@@ -130,6 +154,15 @@ public class DepositAndWithdrawalController {
         return true;
     }
 
+    /**
+     * Processes the account line based on the transaction type and account type.
+     *
+     * @param values the account details
+     * @param serviceType the type of service (deposit or withdrawal)
+     * @param accountType the type of account (current or saving)
+     * @param amount the amount to be deposited or withdrawn
+     * @return true if the account line was successfully processed, false otherwise
+     */
     private boolean processAccountLine(String[] values, String serviceType, String accountType, float amount) {
         float currentAmount = Float.parseFloat(values[1]);
         float savingAmount = Float.parseFloat(values[2]);
@@ -189,7 +222,16 @@ public class DepositAndWithdrawalController {
         return true;
     }
 
-
+    /**
+     * Logs the transaction details to a CSV file.
+     *
+     * @param userId the ID of the user
+     * @param dateTime the date and time of the transaction
+     * @param amount the amount involved in the transaction
+     * @param accountType the type of account (current or saving)
+     * @param serviceType the type of service (deposit or withdrawal)
+     * @param description the description of the transaction
+     */
     private void logTransaction(String userId, LocalDateTime dateTime, float amount, String accountType, String serviceType, String description) {
         File transactionFile = new File(Utils.CSV_FILE_PATH_transactionRecord);
 
@@ -213,6 +255,11 @@ public class DepositAndWithdrawalController {
         }
     }
 
+    /**
+     * Handles the back button click event. Navigates back to the Child_MainPage.fxml page.
+     *
+     * @param event the action event triggered by clicking the back button
+     */
     @FXML
     private void handleBack(ActionEvent event) {
         Utils.showPage("Child_MainPage.fxml", btnBack);

@@ -8,6 +8,15 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 
+/**
+ * The AccountInfoController class is responsible for handling the account information view.
+ * It initializes user data, updates interest calculations, and manages navigation between different views.
+ *
+ * @version 5.0 May 25th, 2024
+ * @author Jiabo Tong
+ * @author Ruoqi Liu
+ */
+
 public class AccountInfoController {
 
     @FXML
@@ -36,12 +45,19 @@ public class AccountInfoController {
     Utils Utils = new Utils();
     FileUtil FileUtil = new FileUtil();
 
+    /**
+     * Initializes the controller class and loads user data.
+     */
     public void initialize() {
 
         UserInfoBean userInfo = UserInfoBean.getInstance();
         loadUserData(userInfo);
     }
 
+    /**
+     * Loads the user data and populates the fields accordingly.
+     * @param userInfo The user information bean containing user data.
+     */
     private void loadUserData(UserInfoBean userInfo) {
         nameField.setText(userInfo.getUserName());
         roleField.setText(userInfo.getRole());
@@ -66,6 +82,10 @@ public class AccountInfoController {
         }
     }
 
+    /**
+     * Updates the fields with the data from the given HashMap.
+     * @param data A HashMap containing the account information.
+     */
     private void updateFields(HashMap<String, String> data) {
         if (data != null) {
             currentAccountField.setText(data.getOrDefault("Current", "0"));
@@ -74,6 +94,10 @@ public class AccountInfoController {
         }
     }
 
+    /**
+     * Updates the interest on the current and saving amounts based on the time elapsed since the last login.
+     * @param data A HashMap containing the account information.
+     */
     private void updateInterest(HashMap<String, String> data) {
         if (data != null) {
 
@@ -101,11 +125,17 @@ public class AccountInfoController {
         }
     }
 
+    /**
+     * Handles the action of the edit button click. Navigates to the EditInfo.fxml page.
+     */
     @FXML
     private void onEditClicked() {
         Utils.showPage("EditInfo.fxml",btnEdit);
     }
 
+    /**
+     * Handles the action of the back button click. Navigates to the main page based on the user role.
+     */
     @FXML
     private void onBackClicked() {
         if (roleField.getText().equals("Parent")) {
@@ -115,6 +145,9 @@ public class AccountInfoController {
         }
     }
 
+    /**
+     * Handles the action of the check button click. Shows an information alert indicating future implementation.
+     */
     @FXML
     private void onCheckClicked() {
         Utils.showAlert("Inform", "To be finished in the following iterations", Alert.AlertType.INFORMATION);

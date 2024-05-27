@@ -12,6 +12,15 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The RelateChildController class is responsible for managing the relationship
+ * between a parent user and their child in the application. It handles the UI interactions
+ * and updates the user information based on the input provided.
+ *
+ * @version 5.0 May 25th, 2024
+ * @author Jiabo Tong
+ * @author Kexin Zhang
+ */
 public class RelateChildController {
 
     @FXML
@@ -26,6 +35,11 @@ public class RelateChildController {
     Utils Utils = new Utils();
     FileUtil FileUtil = new FileUtil();
 
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded. It sets the current associated child
+     * if available.
+     */
     @FXML
     private void initialize() {
         UserInfoBean userInfo = UserInfoBean.getInstance();
@@ -37,6 +51,10 @@ public class RelateChildController {
 
     }
 
+    /**
+     * Handles the confirm button click event. It validates the input child name
+     * and password, and if correct, associates the child with the parent user.
+     */
     @FXML
     private void onConfirmClicked() {
         String Associated_child = childName.getText().trim();
@@ -82,11 +100,22 @@ public class RelateChildController {
         }
     }
 
+    /**
+     * Handles the back button click event. It navigates the user back to the parent main page.
+     */
     @FXML
     private void onBackClicked() {
         Utils.showPage("Parent_MainPage.fxml", btnBack);
     }
 
+    /**
+     * Updates the user information in the CSV file after successfully associating
+     * a child with the parent user.
+     *
+     * @param users the list of user information from the CSV file
+     * @param userInfo the user information bean with updated data
+     * @throws IOException if an I/O error occurs while writing to the file
+     */
     private void updateUserInfo(List<String[]> users, UserInfoBean userInfo) throws IOException {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(Utils.CSV_FILE_PATH_userInfo))) {
             for (String[] user : users) {

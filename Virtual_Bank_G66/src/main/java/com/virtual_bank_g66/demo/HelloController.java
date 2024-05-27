@@ -11,6 +11,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * The HelloController class manages the interaction between the UI components
+ * and the application logic for the login functionality.
+ *
+ * @version 5.0 May 25th, 2024
+ * @author Jiabo Tong
+ * @author Kexin Zhang
+ */
 public class HelloController {
 
     @FXML
@@ -28,6 +36,11 @@ public class HelloController {
     Utils Utils = new Utils();
     FileUtil FileUtil = new FileUtil();
 
+    /**
+     * Switches the scene to the account creation page.
+     *
+     * @param event the ActionEvent triggered when the create account button is clicked.
+     */
     @FXML
     void switchToAccountCreation(ActionEvent event) {
         try {
@@ -41,6 +54,9 @@ public class HelloController {
         }
     }
 
+    /**
+     * Handles the login process when the login button is clicked.
+     */
     @FXML
     protected void login() {
         String role = roleComboBox.getValue();
@@ -67,6 +83,11 @@ public class HelloController {
         }
     }
 
+    /**
+     * Switches the scene to the main page based on the user's role.
+     *
+     * @param role the user's role (Parent or Child).
+     */
     // Placeholder method to switch to main page
     private void switchToMainPage(String role) {
         try {
@@ -93,6 +114,14 @@ public class HelloController {
         }
     }
 
+    /**
+     * Checks the credentials entered by the user.
+     *
+     * @param role     the user's role.
+     * @param name     the user's name.
+     * @param password the user's password.
+     * @return true if the credentials are correct, false otherwise.
+     */
     private boolean checkCredentials(String role, String name, String password) {
         String csvFile = Utils.CSV_FILE_PATH_userInfo;
         String line;

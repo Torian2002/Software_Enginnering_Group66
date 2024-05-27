@@ -4,6 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.util.List;
 
+/**
+ * The AddTaskController class is responsible for handling the task addition view.
+ * It provides functionality to add new tasks with validation and authentication.
+ *
+ * @version 5.0 May 25th, 2024
+ * @author Jiabo Tong
+ * @author Kexin Zhang
+ */
 public class AddTaskController {
     @FXML
     private Button btnBack;
@@ -17,6 +25,10 @@ public class AddTaskController {
     Utils Utils = new Utils();
     FileUtil FileUtil = new FileUtil();
 
+    /**
+     * Handles the action of the confirm button click. Validates input, authenticates the user,
+     * and adds a new task if validation and authentication succeed.
+     */
     @FXML
     private void onConfirmClicked() {
         String content = TaskContent.getText().trim();
@@ -67,6 +79,9 @@ public class AddTaskController {
         }
     }
 
+    /**
+     * Handles the action of the back button click. Navigates back to the Parent_TasksGoalPage.fxml page.
+     */
     @FXML
     private void onBackClicked(){
         Utils.showPage("Parent_TasksGoalPage.fxml", btnBack);

@@ -16,10 +16,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The FileUtil class provides utility methods for reading and writing
+ * user financial information from/to CSV files, as well as managing
+ * user tasks and transactions.
+ *
+ * @version 5.0 May 25th, 2024
+ * @author Jiabo Tong
+ */
 public class FileUtil {
 
     Utils Utils = new Utils();
-    
+
+    /**
+     * Reads the money information of a user from the CSV file based on the user ID.
+     *
+     * @param id the user ID
+     * @return a HashMap containing the user's financial information
+     */
     public HashMap<String, String> readMoneyInfoCsv(String id) {
         String line;
         HashMap<String, String> data = new HashMap<>();
@@ -40,7 +54,12 @@ public class FileUtil {
         return data;
     }
 
-
+    /**
+     * Writes updated money information of a user to the CSV file.
+     *
+     * @param id the user ID
+     * @param data a HashMap containing the updated financial information
+     */
     public void writeMoneyInfoCsv(String id, HashMap<String, String> data) {
         String line;
         List<String> fileContent = new ArrayList<>();
@@ -69,7 +88,11 @@ public class FileUtil {
         }
     }
 
-
+    /**
+     * Ensures that a file exists at the specified path, creating it if necessary.
+     *
+     * @param filePath the path to the file
+     */
     public void ensureFileExists(String filePath) {
         File file = new File(filePath);
         try {
@@ -81,6 +104,13 @@ public class FileUtil {
             throw new RuntimeException("Unable to create the file: " + filePath);
         }
     }
+
+    /**
+     * Retrieves the spending limit for a user and sets it in the provided text field.
+     *
+     * @param ID the user ID
+     * @param limitTextField the text field to set the limit
+     */
     public void getLimit(String ID, TextField limitTextField)
     {
         try {
@@ -99,6 +129,12 @@ public class FileUtil {
         }
     }
 
+    /**
+     * Retrieves the savings goal for a user and sets it in the provided text field.
+     *
+     * @param ID the user ID
+     * @param GoalTextField the text field to set the goal
+     */
     public void getGoal(String ID, TextField GoalTextField)
     {
         try {
@@ -117,6 +153,12 @@ public class FileUtil {
         }
     }
 
+    /**
+     * Overloaded method to retrieve the savings goal for a user and set it in the provided text element.
+     *
+     * @param ID the user ID
+     * @param GoalTextField the text element to set the goal
+     */
     public  void getGoal(String ID, Text GoalTextField)
     {
         try {
@@ -135,7 +177,12 @@ public class FileUtil {
         }
     }
 
-
+    /**
+     * Updates the savings goal for a user in the CSV file.
+     *
+     * @param ID the user ID
+     * @param goal the new goal to set
+     */
     public  void updateGoal(String ID, String goal) {
         Path filePath = Paths.get(Utils.CSV_FILE_PATH_moneyInfo); // Ensure Utils.CSV_FILE_PATH_moneyInfo is the correct path to the CSV file.
         if (goal == null || goal.isEmpty()){
@@ -179,7 +226,12 @@ public class FileUtil {
         }
     }
 
-
+    /**
+     * Loads transaction records for a user into the specified table view.
+     *
+     * @param ID the user ID
+     * @param transactionTable the table view to set the transaction records
+     */
     public  void loadTransactionRecord(String ID, TableView<TransactionRecordBean> transactionTable) {
         ObservableList<TransactionRecordBean> transactionRecordBeans = FXCollections.observableArrayList();
 
@@ -197,6 +249,12 @@ public class FileUtil {
         transactionTable.setItems(transactionRecordBeans);
     }
 
+    /**
+     * Loads tasks for a user from the CSV file.
+     *
+     * @param ID the user ID
+     * @return a list of TaskBean objects representing the user's tasks
+     */
     public  List<TaskBean> loadTasks(String ID) {
         String filePath = Utils.CSV_FILE_PATH_tasks;
         ensureFileExists(filePath);
@@ -216,6 +274,12 @@ public class FileUtil {
         return tasks;
     }
 
+    /**
+     * Updates tasks in the CSV file based on the specified service type.
+     *
+     * @param updatedTasks a list of TaskBean objects representing the updated tasks
+     * @param service the type of service to perform ("stateChange", "Delete", or "Add")
+     */
     public  void updateTasks(List<TaskBean> updatedTasks, String service) {
         String filePath = Utils.CSV_FILE_PATH_tasks;
         File file = new File(filePath);
@@ -272,7 +336,12 @@ public class FileUtil {
 
     }
 
-
+    /**
+     * Sends a reward to a child's current account in the CSV file.
+     *
+     * @param ID the user ID of the child
+     * @param Reward the reward amount to send
+     */
     public  void sendRewardToChild(String ID, String Reward) {
         String filePath = Utils.CSV_FILE_PATH_moneyInfo;
         File file = new File(filePath);
@@ -317,7 +386,5 @@ public class FileUtil {
             Utils.showAlert("Success", "Reward successfully sent to child's current account.", Alert.AlertType.INFORMATION);
         }
     }
-
-
 
 }

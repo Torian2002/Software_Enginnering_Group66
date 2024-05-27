@@ -4,18 +4,39 @@ import javafx.scene.control.Alert;
 
 import java.io.*;
 
+/**
+ * The AccountService class provides services related to account management,
+ * including account creation and password validation.
+ *
+ * @version 5.0 May 25th, 2024
+ * @author Jiabo Tong
+ * @author Ruoqi Liu
+ */
 public class AccountService {
 
     private  String userInfoFilePath;
     private  String moneyInfoFilePath;
     private  Utils Utils;
 
+    /**
+     * Constructs an AccountService with the specified file paths and utility instance.
+     *
+     * @param userInfoFilePath The file path for user information storage.
+     * @param moneyInfoFilePath The file path for money information storage.
+     * @param utils The Utils instance for utility functions.
+     */
     public AccountService(String userInfoFilePath, String moneyInfoFilePath, Utils utils) {
         this.userInfoFilePath = userInfoFilePath;
         this.moneyInfoFilePath = moneyInfoFilePath;
         this.Utils = utils;
     }
 
+    /**
+     * Validates the given password based on specific criteria.
+     *
+     * @param password The password to be validated.
+     * @return true if the password is valid, false otherwise.
+     */
     public static boolean isValid(String password) {
         if (password == null || password.length() < 5 || password.length() > 9) {
             return false;
@@ -37,6 +58,15 @@ public class AccountService {
         return hasLetter && hasDigit;
     }
 
+    /**
+     * Creates a new account with the specified role, name, password, and email.
+     *
+     * @param role The role of the user.
+     * @param name The name of the user.
+     * @param password The password for the account.
+     * @param email The email of the user.
+     * @return true if the account is successfully created, false otherwise.
+     */
     public boolean createAccount(String role, String name, String password, String email) {
         if (role.equals("")||name.equals("")||password.equals("")||email.equals(""))
             return false;
@@ -114,6 +144,12 @@ public class AccountService {
         return true;
     }
 
+    /**
+     * Writes initial money information for the account with the specified account number.
+     *
+     * @param accountNumber The account number for which the money information is written.
+     * @return true if the money information is successfully written, false otherwise.
+     */
     private boolean writeMoneyInfo(int accountNumber) {
         File file_moneyInfo = new File(moneyInfoFilePath);
 

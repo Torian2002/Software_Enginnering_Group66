@@ -1,1 +1,3 @@
 ID,Role,Name,password,mail,Associated_child,Associated_ID
+2,Child,child1,123abc,111@example.com, , 
+3,Parent,parent1,123abc,222@example.com,child1,2
