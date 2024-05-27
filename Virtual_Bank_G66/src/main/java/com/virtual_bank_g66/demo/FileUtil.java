@@ -21,7 +21,8 @@ import java.util.stream.Collectors;
  * user financial information from/to CSV files, as well as managing
  * user tasks and transactions.
  *
- * @version 5.0 May 25th, 2024
+ * @version 2.0 April 24th, 2024 - introduced as utility classes to promote code reuse
+ * @version 3.0 May 15th, 2024 - further separate reusable methods and improve utility classes
  * @author Jiabo Tong
  */
 public class FileUtil {

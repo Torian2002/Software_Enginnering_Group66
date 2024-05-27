@@ -11,7 +11,7 @@ import java.io.IOException;
  * The HelloApplication class serves as the entry point for the JavaFX application.
  * It loads the initial FXML layout and sets up the primary stage.
  *
- * @version 3.0 May 17th, 2024
+ * @version 1.0 April 10th, 2024 - create HelloApplication as default startup class
  * @author Jiabo Tong
  */
 public class HelloApplication extends Application {

@@ -15,7 +15,9 @@ import java.time.LocalDateTime;
  * for both current and saving accounts. It validates user input, processes transactions,
  * and logs the transaction details.
  *
- * @version 5.0 May 25th, 2024
+ * @version 1.0 April 10th, 2024 - fulfill basic requirements to deposit money and withdraw money from both current and saving account.
+ * @version 2.0 April 24th, 2024 - introduce utility classes to promote code reuse
+ * @version 3.0 May 15th, 2024 - Modified withdrawal functionality as per assistant's suggestions (add timeLimit)
  * @author Jiabo Tong
  * @author Jiameng Chen
  */

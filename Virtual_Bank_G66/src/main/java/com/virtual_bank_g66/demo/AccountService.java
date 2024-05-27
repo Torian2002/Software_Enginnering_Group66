@@ -8,7 +8,7 @@ import java.io.*;
  * The AccountService class provides services related to account management,
  * including account creation and password validation.
  *
- * @version 5.0 May 25th, 2024
+ * @version 3.0 May 15th, 2024 - improve the management of user account creation and related verification
  * @author Jiabo Tong
  * @author Ruoqi Liu
  */

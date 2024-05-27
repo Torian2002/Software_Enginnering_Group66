@@ -14,7 +14,8 @@ import java.util.stream.Collectors;
  * logic for editing user information. It allows users to update their name,
  * email, and password.
  *
- * @version 5.0 May 25th, 2024
+ * @version 2.0 April 24th, 2024 - support user to edit their information in the viewing page
+ * @version 3.0 May 15th, 2024 - improve refactoring by introducing utility class
  * @author Jiabo Tong
  * @author Ruoqi Liu
  */

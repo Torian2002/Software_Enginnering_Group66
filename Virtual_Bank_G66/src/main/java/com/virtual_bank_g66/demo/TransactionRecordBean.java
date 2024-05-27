@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
  * of the transaction. Each field is represented as a SimpleStringProperty to facilitate binding
  * in JavaFX applications.
  *
- * @version 5.0 May 25th, 2024
+ * @version 1.0 April 10th, 2024 - create getter and setters for properties related to transaction
  * @author Jiabo Tong
  * @author Wantong Zhao
  */

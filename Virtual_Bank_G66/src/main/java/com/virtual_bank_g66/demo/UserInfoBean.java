@@ -4,7 +4,8 @@ package com.virtual_bank_g66.demo;
  * The UserInfoBean class holds the user information that remains constant during a session.
  * This class follows the Singleton pattern to ensure a single instance during the session.
  *
- * @version 5.0 May 25th, 2024
+ * @version 1.0 April 10th, 2024 - original UserSessionBean including both user and money information
+ * @version 2.0 April 24th, 2024 - separate user information from previous UserSessionBean (deleted)
  * @author Jiabo Tong
  * @author Zonghuan Han
  */

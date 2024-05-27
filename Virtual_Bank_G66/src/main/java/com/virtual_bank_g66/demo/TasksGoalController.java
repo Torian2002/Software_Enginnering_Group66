@@ -14,7 +14,8 @@ import java.util.List;
  * task table, task-related actions (add, delete, finish, confirm),
  * and setting savings goals.
  *
- * @version 5.0 May 25th, 2024
+ * @version 1.0 April 10th, 2024 - fulfill basic requirement to manage tasks and saving goals
+ * @version 2.0 April 24th, 2024 - introduce utility classes when refactoring code
  * @author Jiabo Tong
  * @author Kexin Zhang
  */

@@ -12,7 +12,8 @@ import java.util.HashMap;
  * The AccountInfoController class is responsible for handling the account information view.
  * It initializes user data, updates interest calculations, and manages navigation between different views.
  *
- * @version 5.0 May 25th, 2024
+ * @version 1.0 April 10th, 2024 - support user to view their basic account information
+ * @version 2.0 April 24th, 2024 - introduce utility classes when refactoring code
  * @author Jiabo Tong
  * @author Ruoqi Liu
  */
