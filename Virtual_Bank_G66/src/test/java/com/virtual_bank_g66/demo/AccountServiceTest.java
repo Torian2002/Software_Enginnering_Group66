@@ -14,8 +14,8 @@ import java.io.IOException;
  * account creation, password validation, and handling missing or duplicate account information.
  * </p>
  * 
- * @version 1.0 Partition test the validity of the password
- * @version 2.0 A series of tests to supplement account creation
+ * @version 1.0 April 10th, 2024 Partition test the validity of the password
+ * @version 2.0 April 24th, 2024 A series of tests to supplement account creation
  * @author Jiabo Tong
  * @author Kexing Zhang
  */
